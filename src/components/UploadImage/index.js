@@ -12,46 +12,67 @@ class UploadImage extends Component{
       files: []
     }
   }
+
   onDrop(files) {
     this.setState({
       files
     });
   }
+
+  previewImg() {
+    return (
+      this.state.files.map(file => {
+        console.log(file);
+        return (
+          <div className="preview-img" style={{
+            backgroundImage: 'url('+file.preview+')',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
+            backgroundSize: 'cover'
+          }}>
+
+          </div>
+        )
+      })
+    )
+  }
+
   render(){
     return (
-        <div>
-          <div className="dropzone">
-            <Dropzone
-              accept="image/jpeg, image/png"
-              onDrop={this.onDrop.bind(this)}
-              className="react-upload-img"
-            >
-              {({ isDragActive, isDragReject, acceptedFiles, rejectedFiles }) => {
-                if (isDragActive) {
-                  return (
-                    <div className="react-upload-img-content-full">
-                      <img src={successIC} className="react-upload-img-content-full-icon" alt="success"/>
-                    </div>
-                  );
-                }
-                if (isDragReject) {
-                  return (
-                    <div className="react-upload-img-content-full">
-                      <img src={errorIC} className="react-upload-img-content-full-icon" alt="error"/>
-                    </div>
-                  );
-                }
-                return (
-                  <div className="react-upload-img-content">
-                    <div className="react-upload-img-content-text">{this.state.contentText}</div>
-                    <div className="react-upload-img-content-or">or</div>
-                    <label htmlFor="file">Add photos</label>
-                  </div>
-                );
-              }}
-            </Dropzone>
-          </div>
+      <div className="react-upload-img-component">
+        <Dropzone
+          accept="image/jpeg, image/png"
+          onDrop={this.onDrop.bind(this)}
+          className="react-upload-img"
+        >
+          {({ isDragActive, isDragReject, acceptedFiles, rejectedFiles }) => {
+            if (isDragActive) {
+              return (
+                <div className="react-upload-img-content-full">
+                  <img src={successIC} className="react-upload-img-content-full-icon" alt="success"/>
+                </div>
+              );
+            }
+            if (isDragReject) {
+              return (
+                <div className="react-upload-img-content-full">
+                  <img src={errorIC} className="react-upload-img-content-full-icon" alt="error"/>
+                </div>
+              );
+            }
+            return (
+              <div className="react-upload-img-content">
+                <div className="react-upload-img-content-text">{this.state.contentText}</div>
+                <div className="react-upload-img-content-or">or</div>
+                <label htmlFor="file">Add photos</label>
+              </div>
+            );
+          }}
+        </Dropzone>
+        <div className="preview-component">
+          {this.previewImg()}
         </div>
+      </div>
     )
   }
 }
