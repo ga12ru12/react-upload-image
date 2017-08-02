@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import UploadImage from './components/UploadImage'
+import UploadImage from './components/UploadImage';
 
 class App extends Component {
   render() {
@@ -11,12 +11,12 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <p className="App-intro">
+        <div className="App-intro">
           <div>
             <UploadImage />
           </div>
           To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        </div>
       </div>
     );
   }
