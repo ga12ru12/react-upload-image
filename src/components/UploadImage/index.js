@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import _ from 'lodash';
 import errorIC from './icons/ic-error.svg';
@@ -13,6 +14,10 @@ class UploadImage extends Component {
       contentText: 'Drag and drop photos here',
       files: [],
     };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.props.onChange(prevState.files);
   }
 
   onDrop(files) {
@@ -30,7 +35,6 @@ class UploadImage extends Component {
       },
       [],
     );
-    // this.props.onChange({ files });
     this.setState({
       files: _.concat(this.state.files, updateFiles),
     });
@@ -130,5 +134,9 @@ class UploadImage extends Component {
     );
   }
 }
+
+UploadImage.propTypes = {
+  onChange: PropTypes.func,
+};
 
 export default UploadImage;
